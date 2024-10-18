@@ -1,0 +1,23 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+height: 100vh;
+background-color: #0d1117;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+position: relative;
+}
+.magnetic {
+position: absolute;
+width: 80px;
+height: 80px;
+background-color: #ff9d0a;
+border-radius: 50%;
+transition: transform 0.1s ease-out;
+box-shadow: 0 0 20px #ffae00cc;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+height: 100vh;
+background-color: #0d1117;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+position: relative;
+}
+.magnetic {
+position: absolute;
+width: 80px;
+height: 80px;
+background-color: #ff9d0a;
+border-radius: 50%;
+transition: transform 0.1s ease-out;
+box-shadow: 0 0 20px #ffae00cc;
+}
+</style>
+</head>
+<body>
+<div class="magnetic" style="top: 20%; left: 15%;"></div>
+<div class="magnetic" style="top: 50%; left: 70%;"></div>
+<div class="magnetic" style="top: 75%; left: 35%;"></div>
+<div class="magnetic" style="top: 40%; left: 80%;"></div>
+<script>
+const elements = document.querySelectorAll('.magnetic');
+const magneticRange = 100;
+function moveElement(event) {
+const mouseX = event.clientX;
+const mouseY = event.clientY;
+elements.forEach(element => {
+const rect = element.getBoundingClientRect();
+const elementX = rect.left + rect.width / 2;
+const elementY = rect.top + rect.height / 2;
+const distanceX = mouseX - elementX;
+const distanceY = mouseY - elementY;
+const distance = Math.hypot(distanceX, distanceY);
+if (distance < magneticRange) {
+const attraction = (1 - distance / magneticRange) * 50;
+const moveX = (distanceX / distance) * attraction;
+const moveY = (distanceY / distance) * attraction;
+element.style.transform = `translate(${moveX}px, ${moveY}px)`;
+} else {
+element.style.transform = 'translate(0, 0)';
+}
+});
+}
+document.addEventListener('mousemove', moveElement);
+</script>
+</body>
+</html>
